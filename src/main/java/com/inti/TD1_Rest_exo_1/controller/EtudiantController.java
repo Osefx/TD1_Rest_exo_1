@@ -36,13 +36,13 @@ public class EtudiantController
 		return new ResponseEntity<List<Etudiant>>(etudiantRepository.findAll(), HttpStatus.OK);
 	}
 	
-//	@PostMapping("/saveEtudiant")
-//	public String saveEtudiant()
-//	{
-//		Etudiant e = new Etudiant("Cinci", "Hasan", "mail@mail.fr", "566985", 5);
-//		etudiantRepository.save(e);
-//		return "etudiant enregistré";
-//	}
+	@PostMapping("/saveEtudiant")
+	public String saveEtudiant()
+	{
+		Etudiant e = new Etudiant("Cinci", "Hasan", "mail@mail.fr", "566985", 5);
+		etudiantRepository.save(e);
+		return "etudiant enregistré";
+	}
 	
 	@PostMapping("/saveEtudiantAutreManiere")
 	public ResponseEntity<Etudiant> saveEtudiant1(@RequestBody Etudiant e)
