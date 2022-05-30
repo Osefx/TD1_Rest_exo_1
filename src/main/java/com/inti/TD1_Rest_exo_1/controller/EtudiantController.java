@@ -6,11 +6,13 @@ import com.inti.TD1_Rest_exo_1.model.Etudiant;
 import com.inti.TD1_Rest_exo_1.repository.EtudiantRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class EtudiantController 
 {
 
@@ -24,9 +26,9 @@ public class EtudiantController
 	}
 	
 	@GetMapping("/afficherEtudiant")
-	public List<Etudiant> getAllEtudiant()
+	public ResponseEntity<List<Etudiant>> getAllEtudiant()
 	{
-		return etudiantRepository.findAll();
+		return new ResponseEntity<List<Etudiant>>(etudiantRepository.findAll(), HttpStatus.OK);
 	}
 	
 	@PostMapping("/saveEtudiant")
