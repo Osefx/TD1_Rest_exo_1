@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -31,11 +32,19 @@ public class EtudiantController
 		return new ResponseEntity<List<Etudiant>>(etudiantRepository.findAll(), HttpStatus.OK);
 	}
 	
-	@PostMapping("/saveEtudiant")
-	public String saveEtudiant()
+//	@PostMapping("/saveEtudiant")
+//	public String saveEtudiant()
+//	{
+//		Etudiant e = new Etudiant("Cinci", "Hasan", "mail@mail.fr", "566985", 5);
+//		etudiantRepository.save(e);
+//		return "etudiant enregistré";
+//	}
+	
+	@PostMapping("/saveEtudiantAutreManiere")
+	public ResponseEntity<Etudiant> saveEtudiant1(@RequestBody Etudiant e)
 	{
-		Etudiant e = new Etudiant("Cinci", "Hasan", "mail@mail.fr", "566985", 5);
-		etudiantRepository.save(e);
-		return "etudiant enregistré";
+		
+		return new ResponseEntity<Etudiant>(etudiantRepository.save(e), HttpStatus.CREATED);
 	}
+	
 }
