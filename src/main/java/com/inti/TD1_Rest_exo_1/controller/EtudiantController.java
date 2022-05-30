@@ -8,9 +8,13 @@ import com.inti.TD1_Rest_exo_1.repository.EtudiantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -45,6 +49,22 @@ public class EtudiantController
 	{
 		
 		return new ResponseEntity<Etudiant>(etudiantRepository.save(e), HttpStatus.CREATED);
+	}
+	
+	@PutMapping("/updateEtudiant/{id}")
+	public String updateEtudiant(@RequestBody Etudiant e, @PathVariable int id)
+	{
+		etudiantRepository.getReferenceById(id);
+		
+		etudiantRepository.save(e);
+		return "etudiant mis à jour";
+	}
+	
+	@DeleteMapping("/deleteEtudiant")
+	public String deleteEtudiant(@RequestParam("id") int id)
+	{
+		etudiantRepository.deleteById(id);
+		return "Etudiant supprimé";
 	}
 	
 }
